@@ -1,0 +1,12 @@
+.build/*
+build/
+node_modules/
+static/
+assets/
+dist/
+.vscode/
+__tests__/
+*.test.js
+*.test.ts
+*.js
+.gitignore
