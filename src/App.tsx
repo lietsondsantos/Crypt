@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 
 import { Wrapper } from './styles/pages/Home'
 import { encrypt, decrypt } from './util/cesar_algorithm'
@@ -24,6 +24,7 @@ const App = () => {
 
   useEffect(() => {
     setEncodedText(handleChangeOption(text))
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [text])
 
   return (
