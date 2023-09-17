@@ -1,9 +1,9 @@
-<h1 align="center">Welcome to CyberLock :wave:</h1>
+<h1 align="center">Welcome to Crypt :wave:</h1>
 
 <p align="center">
     <img src="https://img.shields.io/badge/Version-1.0.0-brightgreen" alt="version">
-    <img src="https://img.shields.io/github/last-commit/lietsondsantos/CyberLock" alt="last-communit">&nbsp;&nbsp;
-    <img src="https://img.shields.io/github/issues/lietsondsantos/CyberLock" alt="issues">&nbsp;&nbsp;
+    <img src="https://img.shields.io/github/last-commit/lietsondsantos/crypt" alt="last-communit">&nbsp;&nbsp;
+    <img src="https://img.shields.io/github/issues/lietsondsantos/crypt" alt="issues">&nbsp;&nbsp;
     <img src="https://img.shields.io/badge/license-MIT-brightgreen" alt="license">
 </p>
 
@@ -17,9 +17,9 @@
 <br/>
 
 ## <span id="about">:speech_balloon: About</span>
-`CyberLock` is a web application designed to protect your most valuable words and text messages through advanced encryption. With this easy-to-use platform, you can turn words into unintelligible codes, ensuring the confidentiality and security of your communications.
+`Crypt` is a web application designed to protect your most valuable words and text messages through advanced encryption. With this easy-to-use platform, you can turn words into unintelligible codes, ensuring the confidentiality and security of your communications.
 
-> This project is already hosted on the Netlify website and ready to use, to access the web page click [aqui](https://cyberlock.vercel.app/).
+> This project is already hosted on the Netlify website and ready to use, to access the web page click [aqui](https://crypt.vercel.app/).
 
 <br/>
 
@@ -30,13 +30,13 @@ To use the website on your local machine follow the steps below:
 Cloning the Repository:
 
 ```sh
-git clone https://github.com/lietsondsantos/CyberLock.git
+git clone https://github.com/lietsondsantos/crypt.git
 ```
 
 Accessing the project folder:
 
 ```sh
-cd CyberLock
+cd crypt
 ```
 
 Install dependeces:
