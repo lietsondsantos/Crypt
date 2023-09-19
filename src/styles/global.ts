@@ -17,7 +17,7 @@ export const GlobalStyles = createGlobalStyle`
 
   body {
     font-size: 1rem;
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: 'Roboto', Arial, sans-serif;
     text-rendering: optimizeLegibility;
     -webkit-fontSmoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

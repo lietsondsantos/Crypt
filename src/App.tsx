@@ -1,19 +1,34 @@
 import { useState, useEffect } from 'react'
 
-import { Wrapper } from './styles/pages/Home'
-import { encrypt, decrypt } from './util/cesar_algorithm'
-
 import { FiCopy } from 'react-icons/fi'
 import { AiOutlineClose } from 'react-icons/ai'
 
+import { Cesar, Base64 } from './util'
+import { Wrapper } from './styles/pages/Home'
+
+import Logo from './../public/cryptography.png'
+
 const App = () => {
-  const [text, setText] = useState<string>('')
-  const [encodedText, setEncodedText] = useState<string>('')
-  const [options, setOptions] = useState<string>('encrypt')
   const [root, setRoot] = useState<number>(1)
+  const [text, setText] = useState<string>('')
+  const [options, setOptions] = useState<string>('encrypt')
+  const [encodedText, setEncodedText] = useState<string>('')
+  const [encodeType, setEncodeType] = useState<string>('Cesar')
+
+  const cesar = new Cesar()
+  const base64 = new Base64()
 
   const handleChangeOption = (value: string): string => {
-    return options === 'encrypt' ? encrypt(value, root) : decrypt(value, root)
+    switch(encodeType) {
+    case 'Cesar':
+      return options === 'encrypt' ?
+        cesar.encrypt(value, root) : cesar.decrypt(value, root)
+    case 'Base64':
+      return options === 'encrypt' ?
+        base64.encrypt(value) : base64.decrypt(value)
+    default:
+      return ''
+    }
   }
 
   const copyText = (): void => {
@@ -25,12 +40,54 @@ const App = () => {
   useEffect(() => {
     setEncodedText(handleChangeOption(text))
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [text])
+  }, [text, root])
 
   return (
     <Wrapper>
+
+      <img src={Logo} alt="Logo" className='logo' />
+
+      <ul className='list'>
+        <li className={encodeType === 'Cesar' ?
+          'list__item list__item--active' : 'list__item'}
+        >
+          <button
+            type="button"
+            className='item__btn'
+            onClick={() => { setEncodeType('Cesar') }}
+          >
+            Cesar
+          </button>
+        </li>
+
+        <li className={encodeType === 'Base32' ?
+          'list__item list__item--active' : 'list__item'}
+        >
+          <button
+            type="button"
+            className='item__btn'
+            onClick={() => { setEncodeType('Base32') }}
+          >
+            Base32
+          </button>
+        </li>
+
+        <li className={encodeType === 'Base64' ?
+          'list__item list__item--active' : 'list__item'}
+        >
+          <button
+            type="button"
+            className='item__btn'
+            onClick={() => { setEncodeType('Base64') }}
+          >
+            Base64
+          </button>
+        </li>
+      </ul>
+
       <div className='contain'>
         <div className='contain__leftSide'>
+
           <div className='leftSide__topBar'>
             <select
               name="action"
@@ -48,16 +105,19 @@ const App = () => {
               </option>
             </select>
 
-            <input
-              type="number"
-              name="root"
-              id="root"
-              min={1}
-              max={127}
-              defaultValue={1}
-              className='topBar__root'
-              onChange={(e) => { setRoot(Number(e.target.value)) }}
-            />
+            {
+              encodeType === 'Cesar' ?
+                <input
+                  type="number"
+                  name="root"
+                  id="root"
+                  min={1}
+                  max={127}
+                  defaultValue={1}
+                  className='topBar__root'
+                  onChange={(e) => { setRoot(Number(e.target.value)) }}
+                /> : ''
+            }
           </div>
 
           <textarea

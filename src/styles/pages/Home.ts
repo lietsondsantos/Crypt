@@ -5,7 +5,48 @@ export const Wrapper = styled.main`
   height: 100vh;
   display: flex;
   align-items: center;
-  justify-content: center;
+  flex-direction: column;
+
+  .logo {
+    width: 3.5rem;
+    height: auto;
+    margin-top: 2.5rem;
+  }
+
+  .list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3rem;
+    margin-bottom: 4rem;
+    gap: 1rem;
+
+    .list__item {
+      width: max-content;
+      height: max-content;
+      list-style: none;
+
+      .item__btn {
+        width: 100%;
+        height: 100%;
+        font-size: 1rem;
+        font-weight: 500;
+        padding: 0.5rem;
+        border: 1px solid ${({ theme }) => theme.colors.text};
+        border-radius: 6px;
+        color: ${({ theme }) => theme.colors.text};
+        background-color: transparent;
+        cursor: pointer;
+      }
+    }
+
+    .list__item--active {
+      .item__btn  {
+        color: ${({ theme }) => theme.colors.background};
+        background-color: ${({ theme }) => theme.colors.text};
+      }
+    }
+  }
 
   .contain {
     width: max-content;
@@ -40,7 +81,7 @@ export const Wrapper = styled.main`
         height: 4rem;
         display: flex;
         align-items: center;
-        gap: 1rem;
+        gap: 0.5rem;
 
         .topBar__select,
         .topBar__root {
@@ -55,11 +96,11 @@ export const Wrapper = styled.main`
         }
 
         .topBar__select {
-          width: 70%;
+          width: 100%;
         }
 
         .topBar__root {
-          width: 30%;
+          width: 40%;
         }
       }
 
