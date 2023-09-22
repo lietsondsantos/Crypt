@@ -1,11 +1,11 @@
 import { encode, decode } from 'js-base64'
 
 class Base64 {
-  encrypt (value: string) {
+  encode (value: string) {
     return encode(value)
   }
 
-  decrypt (value: string) {
+  decode (value: string) {
     return decode(value)
   }
 }

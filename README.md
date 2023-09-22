@@ -19,7 +19,7 @@
 ## <span id="about">:speech_balloon: About</span>
 `Crypt` is a web application designed to protect your most valuable words and text messages through advanced encryption. With this easy-to-use platform, you can turn words into unintelligible codes, ensuring the confidentiality and security of your communications.
 
-> This project is already hosted on the Netlify website and ready to use, to access the web page click [aqui](https://crypt.vercel.app/).
+> This project is already hosted on the Vercel website and ready to use, to access the web page click [Here](https://crypte.vercel.app/).
 
 <br/>
 
@@ -54,9 +54,9 @@ yarn dev
 <br />
 
 ## <span id="details">:interrobang: Details</span>
-In this project I used `Jest.js` to perform the unit tests and `Cypress.js` to perform the end-to-end tests, if you want to run the tests run the commands below:
+In this project I used `Vitest` to perform the unit tests and `Cypress.js` to perform the end-to-end tests, if you want to run the tests run the commands below:
 
-To run unit tests with Jest.js
+To run unit tests with Vitest
 
 ```sh
 yarn test
@@ -79,7 +79,7 @@ This project was developed with the following technologies:
 - [Styled-components](https://styled-components.com/)
 - [Prettier](https://prettier.io/)
 - [EsLint](https://eslint.org/)
-- [Jest.js](https://jestjs.io/)
+- [Vitest](https://vitest.dev/)
 - [Cypress.js](https://www.cypress.io/)
 - [React-icons](https://react-icons.github.io/react-icons/)
 

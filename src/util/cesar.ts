@@ -1,6 +1,6 @@
 class Cesar {
-  encrypt(value: string, root: number) {
-    const cipher = value.split('').map(item => {
+  encode (str: string, root: number) {
+    const encoded = str.split('').map(item => {
       const convertToNumber = item.charCodeAt(0)
       const convertToString = String
         .fromCharCode(convertToNumber + Number(root))
@@ -8,11 +8,11 @@ class Cesar {
       return convertToString
     })
 
-    return cipher.join('')
+    return encoded.join('')
   }
 
-  decrypt(value: string, root: number) {
-    const cipher = value.split('').map(item => {
+  decode (str: string, root: number) {
+    const encoded = str.split('').map(item => {
       const convertToNumber = item.charCodeAt(0)
       const convertToString = String
         .fromCharCode(convertToNumber - Number(root))
@@ -20,7 +20,7 @@ class Cesar {
       return convertToString
     })
 
-    return cipher.join('')
+    return encoded.join('')
   }
 }
 

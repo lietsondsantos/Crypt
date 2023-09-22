@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { FiCopy } from 'react-icons/fi'
 import { AiOutlineClose } from 'react-icons/ai'
 
-import { Cesar, Base64 } from './util'
+import { Cesar, Base64, Base32 } from './util'
 import { Wrapper } from './styles/pages/Home'
 
 import Logo from './../public/cryptography.png'
@@ -11,25 +11,30 @@ import Logo from './../public/cryptography.png'
 const App = () => {
   const [root, setRoot] = useState<number>(1)
   const [text, setText] = useState<string>('')
-  const [options, setOptions] = useState<string>('encrypt')
+  const [options, setOptions] = useState<string>('encode')
   const [encodedText, setEncodedText] = useState<string>('')
   const [encodeType, setEncodeType] = useState<string>('Cesar')
 
   const cesar = new Cesar()
   const base64 = new Base64()
+  const base32 = new Base32()
 
   const handleChangeOption = (value: string): string => {
     switch (encodeType) {
       case 'Cesar':
-        return options === 'encrypt'
-          ? cesar.encrypt(value, root)
-          : cesar.decrypt(value, root)
+        return options === 'encode'
+          ? cesar.encode(value, root)
+          : cesar.decode(value, root)
       case 'Base64':
-        return options === 'encrypt'
-          ? base64.encrypt(value)
-          : base64.decrypt(value)
+        return options === 'encode'
+          ? base64.encode(value)
+          : base64.decode(value)
+      case 'Base32':
+        return options === 'encode'
+          ? base32.encode(value)
+          : base32.decode(value)
       default:
-        return ''
+        return 'Not supported.'
     }
   }
 
@@ -46,7 +51,7 @@ const App = () => {
 
   useEffect(() => {
     setEncodedText(handleChangeOption(text))
-  }, [text, root])
+  }, [text, root, encodeType])
 
   return (
     <Wrapper>
@@ -115,14 +120,14 @@ const App = () => {
               name='action'
               id='action'
               className='topBar__select'
-              defaultValue='encrypt'
+              defaultValue='encode'
               onChange={e => {
                 setOptions(e.target.value)
               }}
             >
-              <option value='encrypt'>Encriptar</option>
+              <option value='encode'>Encriptar</option>
 
-              <option value='decrypt'>Desencriptar</option>
+              <option value='decode'>Desencriptar</option>
             </select>
 
             {encodeType === 'Cesar' ? (
