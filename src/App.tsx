@@ -19,66 +19,89 @@ const App = () => {
   const base64 = new Base64()
 
   const handleChangeOption = (value: string): string => {
-    switch(encodeType) {
-    case 'Cesar':
-      return options === 'encrypt' ?
-        cesar.encrypt(value, root) : cesar.decrypt(value, root)
-    case 'Base64':
-      return options === 'encrypt' ?
-        base64.encrypt(value) : base64.decrypt(value)
-    default:
-      return ''
+    switch (encodeType) {
+      case 'Cesar':
+        return options === 'encrypt'
+          ? cesar.encrypt(value, root)
+          : cesar.decrypt(value, root)
+      case 'Base64':
+        return options === 'encrypt'
+          ? base64.encrypt(value)
+          : base64.decrypt(value)
+      default:
+        return ''
     }
   }
 
   const copyText = (): void => {
-    navigator.clipboard.writeText(encodedText)
-      .then(() => { alert('Texto Copiado') })
-      .catch(() => { alert('Não foi possível copiar o texto') })
+    navigator.clipboard
+      .writeText(encodedText)
+      .then(() => {
+        alert('Texto Copiado')
+      })
+      .catch(() => {
+        alert('Não foi possível copiar o texto')
+      })
   }
 
   useEffect(() => {
     setEncodedText(handleChangeOption(text))
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [text, root])
 
   return (
     <Wrapper>
-
-      <img src={Logo} alt="Logo" className='logo' />
+      <img src={Logo} alt='Logo' className='logo' />
 
       <ul className='list'>
-        <li className={encodeType === 'Cesar' ?
-          'list__item list__item--active' : 'list__item'}
+        <li
+          className={
+            encodeType === 'Cesar'
+              ? 'list__item list__item--active'
+              : 'list__item'
+          }
         >
           <button
-            type="button"
+            type='button'
             className='item__btn'
-            onClick={() => { setEncodeType('Cesar') }}
+            onClick={() => {
+              setEncodeType('Cesar')
+            }}
           >
             Cesar
           </button>
         </li>
 
-        <li className={encodeType === 'Base32' ?
-          'list__item list__item--active' : 'list__item'}
+        <li
+          className={
+            encodeType === 'Base32'
+              ? 'list__item list__item--active'
+              : 'list__item'
+          }
         >
           <button
-            type="button"
+            type='button'
             className='item__btn'
-            onClick={() => { setEncodeType('Base32') }}
+            onClick={() => {
+              setEncodeType('Base32')
+            }}
           >
             Base32
           </button>
         </li>
 
-        <li className={encodeType === 'Base64' ?
-          'list__item list__item--active' : 'list__item'}
+        <li
+          className={
+            encodeType === 'Base64'
+              ? 'list__item list__item--active'
+              : 'list__item'
+          }
         >
           <button
-            type="button"
+            type='button'
             className='item__btn'
-            onClick={() => { setEncodeType('Base64') }}
+            onClick={() => {
+              setEncodeType('Base64')
+            }}
           >
             Base64
           </button>
@@ -87,37 +110,37 @@ const App = () => {
 
       <div className='contain'>
         <div className='contain__leftSide'>
-
           <div className='leftSide__topBar'>
             <select
-              name="action"
-              id="action"
+              name='action'
+              id='action'
               className='topBar__select'
               defaultValue='encrypt'
-              onChange={(e) => { setOptions(e.target.value) }}
+              onChange={e => {
+                setOptions(e.target.value)
+              }}
             >
-              <option value='encrypt'>
-                Encriptar
-              </option>
+              <option value='encrypt'>Encriptar</option>
 
-              <option value='decrypt'>
-                Desencriptar
-              </option>
+              <option value='decrypt'>Desencriptar</option>
             </select>
 
-            {
-              encodeType === 'Cesar' ?
-                <input
-                  type="number"
-                  name="root"
-                  id="root"
-                  min={1}
-                  max={127}
-                  defaultValue={1}
-                  className='topBar__root'
-                  onChange={(e) => { setRoot(Number(e.target.value)) }}
-                /> : ''
-            }
+            {encodeType === 'Cesar' ? (
+              <input
+                type='number'
+                name='root'
+                id='root'
+                min={1}
+                max={127}
+                defaultValue={1}
+                className='topBar__root'
+                onChange={e => {
+                  setRoot(Number(e.target.value))
+                }}
+              />
+            ) : (
+              ''
+            )}
           </div>
 
           <textarea
@@ -128,21 +151,23 @@ const App = () => {
             maxLength={500}
             placeholder='Digite o texto'
             className='leftSide__textarea'
-            onChange={(e) => { setText(e.target.value) }}
-          >
-          </textarea>
+            onChange={e => {
+              setText(e.target.value)
+            }}
+          />
 
           <div className='bottom'>
             <p className='bottom__textCount'>{text.length} / 500</p>
 
-            {
-              text.length === 0 ||
-                <AiOutlineClose
-                  title='Limpar'
-                  className='bottom__icon'
-                  onClick={() => { setText('') }}
-                />
-            }
+            {text.length === 0 || (
+              <AiOutlineClose
+                title='Limpar'
+                className='bottom__icon'
+                onClick={() => {
+                  setText('')
+                }}
+              />
+            )}
           </div>
         </div>
 
@@ -156,19 +181,19 @@ const App = () => {
             className='rightSide__textarea'
             readOnly
             disabled
-          >
-          </textarea>
+          />
 
-          {
-            text.length === 0 ||
-              <div className='bottom'>
-                <FiCopy
-                  title='Copiar texto'
-                  className='bottom__icon'
-                  onClick={() => { copyText() }}
-                />
-              </div>
-          }
+          {text.length === 0 || (
+            <div className='bottom'>
+              <FiCopy
+                title='Copiar texto'
+                className='bottom__icon'
+                onClick={() => {
+                  copyText()
+                }}
+              />
+            </div>
+          )}
         </div>
       </div>
     </Wrapper>
