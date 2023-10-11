@@ -1,5 +1,5 @@
 class Cesar {
-  encode (str: string, root: number) {
+  public encode (str: string, root: number): string {
     const encoded = str.split('').map(item => {
       const convertToNumber = item.charCodeAt(0)
       const convertToString = String
@@ -11,7 +11,7 @@ class Cesar {
     return encoded.join('')
   }
 
-  decode (str: string, root: number) {
+  public decode (str: string, root: number): string {
     const encoded = str.split('').map(item => {
       const convertToNumber = item.charCodeAt(0)
       const convertToString = String

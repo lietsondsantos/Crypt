@@ -1,12 +1,12 @@
 import { encode, decode } from 'js-base64'
 
 class Base64 {
-  encode (value: string) {
-    return encode(value)
+  public encode (str: string): string {
+    return encode(str)
   }
 
-  decode (value: string) {
-    return decode(value)
+  public decode (str: string): string {
+    return decode(str)
   }
 }
 

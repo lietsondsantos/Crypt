@@ -31,6 +31,7 @@
     "prettier"
   ],
   "rules": {
+    "@typescript-eslint/no-confusing-void-expression": ["error", { "ignoreArrowShorthand": true }],
     "react-hooks/exhaustive-deps": "off",
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",

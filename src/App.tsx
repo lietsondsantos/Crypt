@@ -3,23 +3,23 @@ import { useState, useEffect } from 'react'
 import { FiCopy } from 'react-icons/fi'
 import { AiOutlineClose } from 'react-icons/ai'
 
-import { Cesar, Base64, Base32 } from './util'
 import { Wrapper } from './styles/pages/Home'
+import { Cesar, Base64, Base32 } from './util'
 
 import Logo from './../public/cryptography.png'
 
 const App = () => {
   const [root, setRoot] = useState<number>(1)
-  const [text, setText] = useState<string>('')
+  const [input, setInput] = useState<string>('')
+  const [output, setOutput] = useState<string>('')
   const [options, setOptions] = useState<string>('encode')
-  const [encodedText, setEncodedText] = useState<string>('')
   const [encodeType, setEncodeType] = useState<string>('Cesar')
 
   const cesar = new Cesar()
   const base64 = new Base64()
   const base32 = new Base32()
 
-  const handleChangeOption = (value: string): string => {
+  const checkEncodeType = (value: string): string => {
     switch (encodeType) {
       case 'Cesar':
         return options === 'encode'
@@ -34,24 +34,28 @@ const App = () => {
           ? base32.encode(value)
           : base32.decode(value)
       default:
-        return 'Not supported.'
+        return 'Cifra não suportada.'
     }
   }
 
-  const copyText = (): void => {
+  const handleChangeAction = (value: string): void => {
+    setOptions(value)
+
+    const temp = input
+    setInput(output)
+    setOutput(temp)
+  }
+
+  const copyOutputText = (): void => {
     navigator.clipboard
-      .writeText(encodedText)
-      .then(() => {
-        alert('Texto Copiado')
-      })
-      .catch(() => {
-        alert('Não foi possível copiar o texto')
-      })
+      .writeText(output)
+      .then(() => alert('Texto Copiado'))
+      .catch(() => alert('Não foi possível copiar o texto'))
   }
 
   useEffect(() => {
-    setEncodedText(handleChangeOption(text))
-  }, [text, root, encodeType])
+    setOutput(checkEncodeType(input))
+  }, [input, root, encodeType])
 
   return (
     <Wrapper>
@@ -68,9 +72,7 @@ const App = () => {
           <button
             type='button'
             className='item__btn'
-            onClick={() => {
-              setEncodeType('Cesar')
-            }}
+            onClick={() => setEncodeType('Cesar')}
           >
             Cesar
           </button>
@@ -86,9 +88,7 @@ const App = () => {
           <button
             type='button'
             className='item__btn'
-            onClick={() => {
-              setEncodeType('Base32')
-            }}
+            onClick={() => setEncodeType('Base32')}
           >
             Base32
           </button>
@@ -104,9 +104,7 @@ const App = () => {
           <button
             type='button'
             className='item__btn'
-            onClick={() => {
-              setEncodeType('Base64')
-            }}
+            onClick={() => setEncodeType('Base64')}
           >
             Base64
           </button>
@@ -121,12 +119,9 @@ const App = () => {
               id='action'
               className='topBar__select'
               defaultValue='encode'
-              onChange={e => {
-                setOptions(e.target.value)
-              }}
+              onChange={e => handleChangeAction(String(e.target.value))}
             >
               <option value='encode'>Encriptar</option>
-
               <option value='decode'>Desencriptar</option>
             </select>
 
@@ -139,9 +134,7 @@ const App = () => {
                 max={127}
                 defaultValue={1}
                 className='topBar__root'
-                onChange={e => {
-                  setRoot(Number(e.target.value))
-                }}
+                onChange={e => setRoot(Number(e.target.value))}
               />
             ) : (
               ''
@@ -151,26 +144,22 @@ const App = () => {
           <textarea
             name='inputText'
             id='inputText'
-            value={text}
+            value={input}
             minLength={0}
             maxLength={500}
             placeholder='Digite o texto'
             className='leftSide__textarea'
-            onChange={e => {
-              setText(e.target.value)
-            }}
+            onChange={e => setInput(e.target.value)}
           />
 
           <div className='bottom'>
-            <p className='bottom__textCount'>{text.length} / 500</p>
+            <p className='bottom__textCount'>{input.length} / 500</p>
 
-            {text.length === 0 || (
+            {input.length === 0 || (
               <AiOutlineClose
                 title='Limpar'
                 className='bottom__icon'
-                onClick={() => {
-                  setText('')
-                }}
+                onClick={() => setInput('')}
               />
             )}
           </div>
@@ -180,7 +169,7 @@ const App = () => {
           <textarea
             name='outputText'
             id='outputText'
-            value={text.length === 0 ? 'Texto Criptografado...' : encodedText}
+            value={input.length === 0 ? '...' : output}
             minLength={0}
             maxLength={500}
             className='rightSide__textarea'
@@ -188,14 +177,12 @@ const App = () => {
             disabled
           />
 
-          {text.length === 0 || (
+          {input.length === 0 || (
             <div className='bottom'>
               <FiCopy
                 title='Copiar texto'
                 className='bottom__icon'
-                onClick={() => {
-                  copyText()
-                }}
+                onClick={() => copyOutputText()}
               />
             </div>
           )}

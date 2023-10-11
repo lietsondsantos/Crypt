@@ -1,12 +1,12 @@
 class Base32 {
   private readonly alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567'
 
-  public encode(input: string): string {
-    let output = ''
+  public encode(str: string): string {
+    let encoded = ''
     let buffer = 0
     let bitsLeft = 0
 
-    for (const character of input) {
+    for (const character of str) {
       const charCode = character.charCodeAt(0)
       buffer <<= 8
       buffer |= charCode
@@ -14,25 +14,25 @@ class Base32 {
 
       while (bitsLeft >= 5) {
         const index = (buffer >>> (bitsLeft - 5)) & 0x1f
-        output += this.alphabet[index]
+        encoded += this.alphabet[index]
         bitsLeft -= 5
       }
     }
 
     if (bitsLeft > 0) {
       const index = (buffer << (5 - bitsLeft)) & 0x1f
-      output += this.alphabet[index]
+      encoded += this.alphabet[index]
     }
 
-    return output
+    return encoded
   }
 
-  public decode(input: string): string {
-    let output = ''
+  public decode(str: string): string {
+    let encoded = ''
     let buffer = 0
     let bitsLeft = 0
 
-    for (const character of input) {
+    for (const character of str) {
       const index = this.alphabet.indexOf(character)
 
       if (index === -1) {
@@ -45,17 +45,17 @@ class Base32 {
 
       while (bitsLeft >= 8) {
         const charCode = (buffer >>> (bitsLeft - 8)) & 0xff
-        output += String.fromCharCode(charCode)
+        encoded += String.fromCharCode(charCode)
         bitsLeft -= 8
       }
     }
 
     if (bitsLeft > 0) {
       const charCode = (buffer << (8 - bitsLeft)) & 0xff
-      output += String.fromCharCode(charCode)
+      encoded += String.fromCharCode(charCode)
     }
 
-    return output
+    return encoded
   }
 }
 
