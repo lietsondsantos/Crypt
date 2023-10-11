@@ -2,8 +2,8 @@
 
 <p align="center">
     <img src="https://img.shields.io/badge/Version-1.0.0-brightgreen" alt="version">
-    <img src="https://img.shields.io/github/last-commit/lietsondsantos/crypt" alt="last-communit">&nbsp;&nbsp;
-    <img src="https://img.shields.io/github/issues/lietsondsantos/crypt" alt="issues">&nbsp;&nbsp;
+    <img src="https://img.shields.io/github/last-commit/lietsondsantos/Crypt" alt="last-communit">&nbsp;&nbsp;
+    <img src="https://img.shields.io/github/issues/lietsondsantos/Crypt" alt="issues">&nbsp;&nbsp;
     <img src="https://img.shields.io/badge/license-MIT-brightgreen" alt="license">
 </p>
 
@@ -30,13 +30,13 @@ To use the website on your local machine follow the steps below:
 Cloning the Repository:
 
 ```sh
-git clone https://github.com/lietsondsantos/crypt.git
+git clone https://github.com/lietsondsantos/Crypt.git
 ```
 
 Accessing the project folder:
 
 ```sh
-cd crypt
+cd Crypt
 ```
 
 Install dependeces:
