@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { toast } from 'react-toastify'
 
 import { FiCopy } from 'react-icons/fi'
 import { AiOutlineClose } from 'react-icons/ai'
@@ -49,8 +50,16 @@ const App = () => {
   const copyOutputText = (): void => {
     navigator.clipboard
       .writeText(output)
-      .then(() => alert('Texto Copiado'))
-      .catch(() => alert('Não foi possível copiar o texto'))
+      .then(() => toast.success('Texto Copiado', {
+        toastId: 'clipboardSuccessToast',
+        theme: 'dark',
+        autoClose: 4000,
+      }))
+      .catch(() => toast.warn('Não foi possível copiar o texto', {
+        toastId: 'clipboardErrorToast',
+        theme: 'dark',
+        autoClose: 4000,
+      }))
   }
 
   useEffect(() => {
