@@ -35,7 +35,7 @@ const App = () => {
           ? base32.encode(value)
           : base32.decode(value)
       default:
-        return 'Cifra não suportada.'
+        return 'Não suportada.'
     }
   }
 
@@ -130,8 +130,8 @@ const App = () => {
               defaultValue='encode'
               onChange={e => handleChangeAction(String(e.target.value))}
             >
-              <option value='encode'>Encriptar</option>
-              <option value='decode'>Desencriptar</option>
+              <option value='encode'>Codificar</option>
+              <option value='decode'>Decodificar</option>
             </select>
 
             {encodeType === 'Cesar' ? (
